@@ -18,7 +18,7 @@ public class DBClass extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE USER(Name text,Password text,Number text,Type text)");
+        db.execSQL("CREATE TABLE USER(Email text,Password text,Phone text,Type text)");
 
     }
 
@@ -29,13 +29,13 @@ public class DBClass extends SQLiteOpenHelper {
 
     }
 
-    public boolean onAddData(String name, String password, String number, String type) {
+    public boolean onAddData(String email, String password, String phone, String type) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Email", name);
+        contentValues.put("Email",email );
         contentValues.put("Password", password);
-        contentValues.put("Phone", number);
+        contentValues.put("Phone", phone);
         contentValues.put("Type", type);
 
         long status = db.insert("USER", null, contentValues);
@@ -49,6 +49,7 @@ public class DBClass extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         //select * from table
+
         Cursor cursor = db.query("USER", null,null,null,null,null,null);
         return cursor;
     }
@@ -63,5 +64,29 @@ public class DBClass extends SQLiteOpenHelper {
         db.delete("USER","Email = ?",arr);
 
     }
-}
+    public Cursor Login(String email,String password){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select Email,Password,Type,Phone FROM USER WHERE Name=? AND Password=?",new String[]{
+                email,password
+        });
+        return cursor;
+    }
+   // update data
+      boolean Update(String email,String oldpassword,String newpassword){
+        int update;
+        SQLiteDatabase db = getWritableDatabase();
+          ContentValues contentValues = new ContentValues();
+          contentValues.put("Email",email );
+          contentValues.put("Password", newpassword);
+          String arr[] = {"",""};
+          arr[0] = email;
+          arr[1] =  oldpassword;
+          update = db.update("USER",contentValues,"Email=? and password=?",arr);
+          return (update>-1);
+      }
+
+
+
+    }
+
 

@@ -25,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:paddingLeft="130sp"
-            android:paddingRight="20sp"
+            android:paddingStart="130sp"
+            android:paddingEnd="20sp"
             android:text="@string/login"
             android:textSize="30sp" />
 

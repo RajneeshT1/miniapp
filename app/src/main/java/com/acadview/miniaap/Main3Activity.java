@@ -12,8 +12,10 @@ import java.util.ArrayList;
 
 public class Main3Activity extends AppCompatActivity {
 
-    ListView listview;
+    ListView Listview;
     DBClass dbClass;
+
+
     ArrayList<String> arrayList = new ArrayList<>();
 
 
@@ -22,20 +24,20 @@ public class Main3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        listview = findViewById(R.id.listview);
+        Listview = findViewById(R.id.Listview);
         dbClass = new DBClass(this);
 
         getAllUser();
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 String data = arrayList.get(position);
                 String[] arr = data.split("\n");
-                String name = arr[0];
+                String email = arr[0];
                 //delete
-                dbClass.onDelete(name);
+                dbClass.onDelete(email);
                 getAllUser();
 
             }
@@ -48,19 +50,19 @@ public class Main3Activity extends AppCompatActivity {
         final ArrayList<String> arrayList = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(cursor.getColumnIndex("Name"));
+                String email = cursor.getString(cursor.getColumnIndex("Email"));
 
                 String password = cursor.getString(cursor.getColumnIndex("Password"));
-                String number = cursor.getString(cursor.getColumnIndex("Number"));
+                String phone = cursor.getString(cursor.getColumnIndex("Phone"));
                 String type = cursor.getString(cursor.getColumnIndex("Type"));
 
-                String totData = name + "\n" + password + "\n" + number + "\n" + type;
+                String totData = email + "\n" + password + "\n" + phone  + "\n" + type;
                 arrayList.add(totData);
 
             } while (cursor.moveToNext());
 
-            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
-            listview.setAdapter(arrayAdapter);
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,arrayList);
+            Listview.setAdapter(arrayAdapter);
 
 
         }

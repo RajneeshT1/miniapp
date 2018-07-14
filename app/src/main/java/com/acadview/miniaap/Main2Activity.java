@@ -44,12 +44,14 @@ Button button;
                 if(isSuccessfull){
                     Toast.makeText(Main2Activity.this,"Successful stored",Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
+//                    startActivity(intent);
 
                 }else{
-                    Toast.makeText(Main2Activity.this,"omsuccessful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main2Activity.this,"onsuccessful",Toast.LENGTH_SHORT).show();
                 }
+                Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
+                startActivity(intent);
             }
         });
 
